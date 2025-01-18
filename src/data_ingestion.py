@@ -23,21 +23,21 @@ logger.addHandler(file_handler)
 def load_data(data_path:str)-> pd.DataFrame:
     try:
         df = pd.read_csv(data_path)
-        logger.info("Data Loaded successful...")
+        logger.info("Data Loaded successful...%s")
         return df
     except Exception as e:
-        logger.error("Unexpected error occured...",e)
+        logger.error("Unexpected error occured...%s",e)
         print(e)
 
 def preprocessing_data(data:pd.DataFrame):
     try:
         df = data.copy()
         df = df.drop(['customer_id','country',],axis = 1)
-        logger.info("Data preprocessing complete...")
+        logger.info("Data preprocessing complete...%s")
         return df
     except Exception as e:
         print(e)
-        logger.error("Unexpected error occured...",e)
+        logger.error("Unexpected error occured...%s",e)
 
 def save_data(train_data:pd.DataFrame,test_data:pd.DataFrame,raw_data_path:str):
     try:
@@ -46,11 +46,11 @@ def save_data(train_data:pd.DataFrame,test_data:pd.DataFrame,raw_data_path:str):
         os.makedirs(raw_data_path,exist_ok=True)
         train_data.to_csv(os.path.join(raw_data_path,"train_data.csv"),index=True)
         test_data.to_csv(os.path.join(raw_data_path,"test_data.csv"),index=True)
-        logger.info("Train data and test data saved successful...")
+        logger.info("Train data and test data saved successful...%s")
 
     except Exception as e:
         print(e)
-        logger.error("Unexpected error occured...",e)
+        logger.error("Unexpected error occured...%s",e)
 
 def main(data_path:str):
     try:
@@ -65,7 +65,7 @@ def main(data_path:str):
 
     except Exception as e:
         print(e)
-        logger.error("Unexpected error occured...",e)
+        logger.error("Unexpected error occured...%s",e)
 
 if __name__ == "__main__":
     main("experiments/Bank Customer Churn Prediction.csv")
