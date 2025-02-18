@@ -1,0 +1,29 @@
+stages:
+  data_ingestion:
+    cmd: python3 src/data_ingestion.py
+    deps:
+      - src/data_ingestion.py
+    outs:
+      - data/raw
+
+  feature_engg:
+    cmd: python3 src/feature_engg.py
+    deps:
+      - data/raw
+      - src/feature_engg.py
+    outs:
+      - data/scaled_data
+
+  model_trainer:
+    cmd: python3 src/model_trainer.py
+    deps:
+      - data/scaled_data
+      - src/model_trainer.py
+    outs:
+      - model_objects/models
+
+  model_evaluation:
+    cmd: python3 src/model_evaluation.py
+    deps:
+      - model_objects/models
+      - src/model_evaluation.py
